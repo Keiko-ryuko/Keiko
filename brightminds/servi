@@ -1,0 +1,23 @@
+
+<h1>All Poems</h1>
+       <?php
+       $sql = "SELECT * FROM poems";
+       $result = $con->query($sql);
+
+       if ($result->num_rows > 0) {
+           while ($row = $result->fetch_assoc()) {
+               echo "<div>";
+               echo "<h2>" . $row['title'] . "</h2>";
+               if (!empty($row['image'])) {
+                /*
+                   echo "<img src='../admin/uploads" . $row['image'] . "' alt='" . $row['title'] . "' style='max-width: 200px;'>";
+                   */
+               }
+               echo "<p>" . substr($row['text'], 0, 1000) . "...</p>";
+               echo "<p><strong>Category: " . $row['category'] . "</strong></p>";
+               echo "</div><hr>";
+           }
+       } else {
+           echo "<p>No poems found.</p>";
+       }
+       ?>
